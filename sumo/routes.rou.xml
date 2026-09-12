@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes>
+
+    <vType
+        id="car"
+        accel="2.6"
+        decel="4.5"
+        sigma="0.5"
+        length="5"
+        maxSpeed="13.89"/>
+
+    <route
+        id="north_to_south"
+        edges="north_to_center center_to_south"/>
+
+    <route
+        id="south_to_north"
+        edges="south_to_center center_to_north"/>
+
+    <route
+        id="east_to_west"
+        edges="east_to_center center_to_west"/>
+
+    <route
+        id="west_to_east"
+        edges="west_to_center center_to_east"/>
+
+
+    <flow
+        id="north_traffic"
+        type="car"
+        route="north_to_south"
+        begin="0"
+        end="1000"
+        vehsPerHour="600"/>
+
+    <flow
+        id="south_traffic"
+        type="car"
+        route="south_to_north"
+        begin="0"
+        end="1000"
+        vehsPerHour="400"/>
+
+    <flow
+        id="east_traffic"
+        type="car"
+        route="east_to_west"
+        begin="0"
+        end="1000"
+        vehsPerHour="800"/>
+
+    <flow
+        id="west_traffic"
+        type="car"
+        route="west_to_east"
+        begin="0"
+        end="1000"
+        vehsPerHour="300"/>
+
+</routes>
