@@ -1,0 +1,1804 @@
+
+/* ============================================================
+   GLOBAL
+============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #080c12;
+    color: #f4f7fb;
+    min-height: 100vh;
+}
+
+button,
+a {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 270px;
+
+    background: #090e15;
+    border-right: 1px solid #202936;
+
+    padding: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 0 10px 35px;
+}
+
+.brand-icon {
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    background: #121a25;
+
+    border: 1px solid #263142;
+
+    border-radius: 13px;
+
+    font-size: 22px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+}
+
+.brand h2 {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.brand span {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 11px;
+    color: #71809a;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.nav-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 14px 16px;
+
+    color: #8290a8;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: .2s ease;
+}
+
+.nav-item span {
+    width: 17px;
+    text-align: center;
+}
+
+.nav-item:hover {
+    background: #111924;
+    color: #dce5f2;
+}
+
+.nav-item.active {
+    background: #141d29;
+    color: #ffffff;
+}
+
+.nav-item.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 10px;
+    bottom: 10px;
+
+    width: 2px;
+
+    background: #38e6a5;
+
+    border-radius: 5px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding: 20px 10px 5px;
+
+    border-top: 1px solid #202936;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 13px;
+    color: #e4eaf2;
+}
+
+.sidebar-bottom small {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #61718a;
+
+    font-size: 10px;
+}
+
+
+/* ============================================================
+   STATUS DOTS
+============================================================ */
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #39e6a5;
+
+    box-shadow:
+        0 0 10px rgba(57,230,165,.8);
+
+    display: inline-block;
+}
+
+.pulse {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #38e6a5;
+
+    box-shadow:
+        0 0 12px rgba(56,230,165,.9);
+
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .35;
+    }
+}
+
+
+/* ============================================================
+   MAIN
+============================================================ */
+
+.main {
+    width: calc(100% - 270px);
+
+    margin-left: 270px;
+
+    padding: 40px 46px 60px;
+}
+
+.topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 28px;
+}
+
+.eyebrow,
+.section-label {
+    color: #35e6a2;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.topbar h1 {
+    margin-top: 7px;
+
+    font-size: 30px;
+    line-height: 1.15;
+
+    font-weight: 800;
+}
+
+.subtitle {
+    margin-top: 8px;
+
+    color: #71809a;
+
+    font-size: 13px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.simulation-badge {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 10px 13px;
+
+    border: 1px solid #263243;
+    border-radius: 9px;
+
+    color: #a9b5c7;
+
+    background: #0d131c;
+
+    font-size: 11px;
+}
+
+.clock {
+    min-width: 80px;
+
+    color: #7e8ca4;
+
+    font-size: 12px;
+
+    text-align: right;
+}
+
+
+/* ============================================================
+   SIMULATION CONTROL
+============================================================ */
+
+.simulation-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 16px 18px;
+
+    margin-bottom: 18px;
+
+    background: #0d131c;
+
+    border: 1px solid #222d3c;
+
+    border-radius: 12px;
+}
+
+.simulation-info {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    flex: 1;
+}
+
+.control-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #74829a;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.simulation-info strong {
+    font-size: 15px;
+}
+
+.simulation-progress {
+    width: min(550px, 60%);
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.progress-background {
+    width: 100%;
+    height: 7px;
+
+    background: #202b39;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.simulation-progress-bar {
+    width: 0%;
+    height: 100%;
+
+    background: #3ce7aa;
+
+    border-radius: inherit;
+
+    transition: width .25s linear;
+}
+
+.simulation-progress span {
+    color: #5e6d84;
+    font-size: 9px;
+}
+
+.simulation-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.control-btn {
+    padding: 9px 13px;
+
+    color: #aeb9c9;
+
+    background: #111923;
+
+    border: 1px solid #263142;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+}
+
+.control-btn:hover {
+    background: #17212d;
+    color: #fff;
+}
+
+.control-btn.primary {
+    color: #45e8ad;
+
+    background: rgba(53,230,162,.1);
+
+    border-color: rgba(53,230,162,.3);
+}
+
+.control-btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   KPI
+============================================================ */
+
+.kpi-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 18px;
+}
+
+.kpi-card {
+    min-height: 140px;
+
+    padding: 20px;
+
+    background: #0e141e;
+
+    border: 1px solid #222c3a;
+
+    border-radius: 13px;
+}
+
+.kpi-top {
+    display: flex;
+    justify-content: space-between;
+
+    color: #78879f;
+
+    font-size: 11px;
+}
+
+.kpi-icon {
+    color: #6e7d95;
+    font-size: 13px;
+}
+
+.kpi-values {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+
+    margin-top: 21px;
+}
+
+.kpi-values strong {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.unit {
+    color: #7a89a1;
+    font-size: 10px;
+}
+
+.improvement {
+    margin-top: 8px;
+
+    color: #38e6a5;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.improvement span {
+    color: #697991;
+    font-weight: 400;
+
+    margin-left: 4px;
+}
+
+
+/* ============================================================
+   PANELS
+============================================================ */
+
+.panel {
+    background: #0e141e;
+
+    border: 1px solid #222c3a;
+
+    border-radius: 13px;
+}
+
+.main-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(0, .85fr);
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+}
+
+.signal-panel,
+.prediction-panel {
+    min-width: 0;
+}
+
+.panel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 20px 22px 15px;
+}
+
+.panel-header h2 {
+    margin-top: 7px;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.live-label,
+.model-badge,
+.result-badge,
+.time-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 10px;
+
+    color: #8d9bb0;
+
+    border: 1px solid #253040;
+
+    border-radius: 8px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+.live-label {
+    color: #3ce6aa;
+}
+
+
+/* ============================================================
+   INTERSECTION
+============================================================ */
+
+.intersection {
+    position: relative;
+
+    height: 380px;
+
+    margin: 0 22px;
+
+    overflow: hidden;
+
+    background: #0c121a;
+
+    border: 1px solid #202b39;
+
+    border-radius: 11px;
+}
+
+
+/* Roads */
+
+.road {
+    position: absolute;
+
+    background: #28313e;
+
+    z-index: 1;
+}
+
+.vertical-road {
+    width: 102px;
+    height: 100%;
+
+    left: 50%;
+    top: 0;
+
+    transform: translateX(-50%);
+}
+
+.horizontal-road {
+    width: 100%;
+    height: 102px;
+
+    left: 0;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+
+/* Road edge lines */
+
+.vertical-road::before,
+.vertical-road::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background: rgba(130,145,165,.12);
+}
+
+.vertical-road::before {
+    left: 0;
+}
+
+.vertical-road::after {
+    right: 0;
+}
+
+.horizontal-road::before,
+.horizontal-road::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    background: rgba(130,145,165,.12);
+}
+
+.horizontal-road::before {
+    top: 0;
+}
+
+.horizontal-road::after {
+    bottom: 0;
+}
+
+
+/* Lane lines */
+
+.lane-line {
+    position: absolute;
+
+    background: rgba(150,160,178,.3);
+
+    z-index: 2;
+}
+
+.vertical-line-1,
+.vertical-line-2 {
+    width: 2px;
+    height: 100%;
+
+    top: 0;
+}
+
+.vertical-line-1 {
+    left: calc(50% - 32px);
+}
+
+.vertical-line-2 {
+    left: calc(50% + 32px);
+}
+
+.horizontal-line-1,
+.horizontal-line-2 {
+    width: 100%;
+    height: 2px;
+
+    left: 0;
+}
+
+.horizontal-line-1 {
+    top: calc(50% - 32px);
+}
+
+.horizontal-line-2 {
+    top: calc(50% + 32px);
+}
+
+
+/* ============================================================
+   VEHICLES
+============================================================ */
+
+.vehicles {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+.car {
+    position: absolute;
+
+    font-size: 18px;
+
+    filter:
+        drop-shadow(0 2px 3px rgba(0,0,0,.7));
+
+    transition:
+        opacity .3s ease,
+        filter .3s ease;
+}
+
+
+/* North -> South */
+
+/* ============================================================
+   VEHICLES
+============================================================ */
+
+.vehicles {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    overflow: visible;
+}
+
+
+/* ------------------------------------------------------------
+   Individual vehicle
+------------------------------------------------------------ */
+
+.car {
+    position: absolute;
+
+    font-size: 17px;
+
+    line-height: 1;
+
+    transform-origin: center center;
+
+    transition:
+        opacity 0.25s ease,
+        filter 0.25s ease;
+
+    will-change: transform;
+
+    filter:
+        drop-shadow(
+            0 2px 3px rgba(0, 0, 0, 0.5)
+        );
+}
+
+
+/* ============================================================
+   NORTH → SOUTH VEHICLES
+============================================================ */
+
+.car-ns-1,
+.car-ns-2,
+.car-ns-3,
+.car-ns-4 {
+
+    left: calc(50% - 45px);
+
+    top: -25px;
+
+}
+
+
+/*
+    Second NS lane.
+*/
+
+.car-ns-3,
+.car-ns-4 {
+
+    left: calc(50% + 18px);
+
+}
+
+
+/* ============================================================
+   EAST → WEST VEHICLES
+============================================================ */
+
+.car-ew-1,
+.car-ew-2,
+.car-ew-3,
+.car-ew-4 {
+
+    left: calc(100% + 20px);
+
+    top: calc(50% - 45px);
+
+}
+
+
+/*
+    Second EW lane.
+*/
+
+.car-ew-3,
+.car-ew-4 {
+
+    top: calc(50% + 18px);
+
+}
+
+
+/* ============================================================
+   STOP-LINE VISUALIZATION
+============================================================ */
+
+/*
+    These subtle lines show where vehicles should stop
+    when their direction has a red signal.
+*/
+
+.intersection::before,
+.intersection::after {
+
+    pointer-events: none;
+
+}
+
+
+/*
+    North/South stop line.
+*/
+
+.intersection.priority-ew
+    .vertical-road::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 3px;
+
+    top: 42%;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.22
+    );
+
+}
+
+
+/*
+    East/West stop line.
+*/
+
+.intersection.priority-ns
+    .horizontal-road::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    height: 100%;
+
+    width: 3px;
+
+    left: 42%;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.22
+    );
+
+}
+
+
+/* ============================================================
+   WAITING VEHICLES
+============================================================ */
+
+/*
+    Slightly dim vehicles that are waiting at a red signal.
+*/
+
+.intersection.priority-ew
+    .ns-vehicles .car {
+
+    opacity: 0.75;
+
+}
+
+
+.intersection.priority-ns
+    .ew-vehicles .car {
+
+    opacity: 0.75;
+
+}
+
+
+/*
+    Green-direction vehicles stay visually prominent.
+*/
+
+.intersection.priority-ns
+    .ns-vehicles .car {
+
+    opacity: 1;
+
+}
+
+
+.intersection.priority-ew
+    .ew-vehicles .car {
+
+    opacity: 1;
+
+}
+
+
+
+
+
+/* ============================================================
+   CENTER SIGNAL
+=====
+======================================================= */
+
+.intersection-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.traffic-light {
+    width: 42px;
+
+    padding: 8px 7px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+
+    background: #06090d;
+
+    border: 2px solid #303a49;
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.45);
+}
+
+.light {
+    width: 21px;
+    height: 21px;
+
+    border-radius: 50%;
+
+    opacity: .18;
+
+    transition:
+        opacity .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+.light.red {
+    background: #ff4651;
+}
+
+.light.yellow {
+    background: #ffbd55;
+}
+
+.light.green {
+    background: #38e5a3;
+}
+
+.light.active-light {
+    opacity: 1;
+
+    transform: scale(1.05);
+}
+
+.light.red.active-light {
+    box-shadow:
+        0 0 18px rgba(255,70,81,.85);
+}
+
+.light.yellow.active-light {
+    box-shadow:
+        0 0 18px rgba(255,189,85,.85);
+}
+
+.light.green.active-light {
+    box-shadow:
+        0 0 18px rgba(56,229,163,.85);
+}
+
+
+/* ============================================================
+   NS / EW INDICATORS
+============================================================ */
+
+.direction-signal {
+    width: 34px;
+    height: 25px;
+
+    display: grid;
+    place-items: center;
+
+    background: #151c26;
+
+    border: 1px solid #222c39;
+
+    border-radius: 6px;
+
+    color: #56657a;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    transition:
+        .3s ease;
+}
+
+.direction-signal.active {
+    color: #43e6aa;
+
+    background: rgba(52,230,163,.1);
+
+    border-color: rgba(52,230,163,.4);
+
+    box-shadow:
+        0 0 14px rgba(52,230,163,.12);
+}
+
+
+/* ============================================================
+   DIRECTIONS
+============================================================ */
+
+.direction {
+    position: absolute;
+
+    z-index: 8;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.direction span {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.direction strong {
+    color: #8290a5;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.direction.north {
+    left: 50%;
+    top: 22px;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+}
+
+.direction.south {
+    left: 50%;
+    bottom: 22px;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+}
+
+.direction.east {
+    right: 24px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    text-align: center;
+}
+
+.direction.west {
+    left: 24px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    text-align: center;
+}
+
+
+/* ============================================================
+   DENSITY LABELS
+============================================================ */
+
+.density-label {
+    position: absolute;
+
+    z-index: 9;
+
+    padding: 5px 7px;
+
+    background: rgba(8,12,18,.8);
+
+    border: 1px solid #263142;
+
+    border-radius: 5px;
+
+    color: #64738b;
+
+    font-size: 8px;
+
+    transition: .3s ease;
+}
+
+.ns-density-label {
+    left: 10px;
+    top: 10px;
+}
+
+.ew-density-label {
+    right: 10px;
+    bottom: 10px;
+}
+
+.density-label.high {
+    color: #ffbd55;
+
+    border-color: rgba(255,189,85,.35);
+}
+
+
+/* ============================================================
+   SIGNAL INFO
+============================================================ */
+
+.signal-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    margin: 16px 22px 0;
+
+    border-top: 1px solid #202b39;
+}
+
+.signal-stat {
+    padding: 14px 10px 16px;
+
+    border-right: 1px solid #202b39;
+}
+
+.signal-stat:last-child {
+    border-right: 0;
+}
+
+.signal-stat span {
+    display: block;
+
+    color: #71809a;
+
+    font-size: 9px;
+}
+
+.signal-stat strong {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 13px;
+}
+
+.signal-stat .priority {
+    color: #39e6a5;
+}
+
+
+/* ============================================================
+   PREDICTION PANEL
+============================================================ */
+
+.prediction-content {
+    padding: 4px 22px 22px;
+}
+
+.traffic-direction {
+    margin-bottom: 25px;
+}
+
+.direction-header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+}
+
+.direction-header strong {
+    font-size: 11px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 9px;
+
+    overflow: hidden;
+
+    background: #202a37;
+
+    border-radius: 10px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    transition:
+        width .5s ease;
+}
+
+.ns-bar {
+    background: #5b8cff;
+}
+
+.ew-bar {
+    background: #ffb653;
+}
+
+.traffic-direction small {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #697991;
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   DECISION
+============================================================ */
+
+.decision-box {
+    padding: 17px;
+
+    background:
+        rgba(32,100,75,.1);
+
+    border: 1px solid rgba(52,218,155,.3);
+
+    border-radius: 10px;
+}
+
+.decision-label {
+    color: #3ce6a6;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+.decision-main {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+
+    margin-top: 9px;
+}
+
+.decision-main strong {
+    font-size: 17px;
+}
+
+.decision-main span {
+    color: #8593aa;
+
+    font-size: 10px;
+}
+
+.decision-box p {
+    margin-top: 10px;
+
+    color: #718099;
+
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   PREDICTION NOTE
+============================================================ */
+
+.prediction-note {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 13px;
+
+    padding: 10px 12px;
+
+    background: #0b1119;
+
+    border: 1px solid #202a38;
+
+    border-radius: 8px;
+}
+
+.prediction-note span {
+    color: #6d7d96;
+}
+
+.prediction-note p {
+    color: #68778e;
+
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   PERFORMANCE
+============================================================ */
+
+.performance-panel,
+.timeline-panel {
+    margin-bottom: 18px;
+}
+
+.comparison-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
+
+    gap: 12px;
+
+    padding: 0 22px 22px;
+}
+
+.comparison-card {
+    padding: 16px;
+
+    background: #0b1119;
+
+    border: 1px solid #202a38;
+
+    border-radius: 10px;
+}
+
+.comparison-title {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+    color: #9ba8bb;
+
+    font-size: 11px;
+}
+
+.comparison-title strong {
+    color: #39e6a5;
+}
+
+.compare-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.compare-bars > div {
+    display: grid;
+
+    grid-template-columns:
+        45px 1fr auto;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.compare-bars label {
+    color: #66758d;
+
+    font-size: 9px;
+}
+
+.bar-container {
+    height: 7px;
+
+    background: #202a37;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+
+    border-radius: inherit;
+}
+
+.bar.fixed {
+    background: #596475;
+}
+
+.bar.adaptive {
+    background: #39dca2;
+}
+
+.compare-bars strong {
+    color: #d8e0eb;
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   TIMELINE
+============================================================ */
+
+.timeline-table {
+    padding: 0 22px 22px;
+}
+
+.table-header,
+.table-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1.2fr
+        1.2fr
+        1.2fr
+        .7fr;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.table-header {
+    padding: 11px 14px;
+
+    color: #59677d;
+
+    background: #0b1119;
+
+    border: 1px solid #202a38;
+
+    border-radius: 7px 7px 0 0;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.table-row {
+    padding: 13px 14px;
+
+    color: #aab5c5;
+
+    border-left: 1px solid #202a38;
+    border-right: 1px solid #202a38;
+    border-bottom: 1px solid #202a38;
+
+    font-size: 10px;
+}
+
+.table-row:last-child {
+    border-radius: 0 0 7px 7px;
+}
+
+.table-row:hover {
+    background: #101722;
+}
+
+.ns-text {
+    color: #5e92ff;
+    font-weight: 700;
+}
+
+.ew-text {
+    color: #ffb653;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+footer {
+    padding-top: 5px;
+
+    color: #4f5e74;
+
+    text-align: center;
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1200px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        width: calc(100% - 220px);
+        margin-left: 220px;
+
+        padding: 30px;
+    }
+
+    .kpi-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .comparison-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .main-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        border-right: 0;
+        border-bottom: 1px solid #202936;
+    }
+
+    .app {
+        display: block;
+    }
+
+    .main {
+        width: 100%;
+        margin-left: 0;
+
+        padding: 25px 18px 45px;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .topbar {
+        flex-direction: column;
+    }
+
+    .simulation-control {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .simulation-info {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .simulation-progress {
+        width: 100%;
+    }
+
+    .simulation-buttons {
+        justify-content: flex-end;
+    }
+
+    .kpi-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .comparison-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .intersection {
+        height: 330px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .main {
+        padding: 20px 12px 35px;
+    }
+
+    .topbar h1 {
+        font-size: 24px;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .table-header,
+    .table-row {
+        grid-template-columns:
+            repeat(5, minmax(70px,1fr));
+
+        overflow-x: auto;
+    }
+
+    .timeline-table {
+        overflow-x: auto;
+    }
+
+    .table-header,
+    .table-row {
+        width: 600px;
+    }
+
+}
+/* =========================================================
+   TRAFFIC SIGNAL VEHICLE CONTROL
+   ========================================================= */
+
+/* Vehicles are allowed to move by default */
+.ns-vehicles .car,
+.ew-vehicles .car {
+    animation-play-state: running;
+    transition: opacity 0.3s ease;
+}
+
+/* When NS has green */
+.intersection.ns-green .ns-vehicles .car {
+    animation-play-state: running;
+}
+
+.intersection.ns-green .ew-vehicles .car {
+    animation-play-state: paused;
+}
+
+/* When EW has green */
+.intersection.ew-green .ew-vehicles .car {
+    animation-play-state: running;
+}
+
+.intersection.ew-green .ns-vehicles .car {
+    animation-play-state: paused;
+}
+
+
+/* =========================================================
+   SIGNAL PRIORITY INDICATORS
+   ========================================================= */
+
+.direction-signal {
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* NS ACTIVE */
+
+.intersection.ns-green .ns-signal {
+    background: rgba(52, 211, 153, 0.16);
+    border-color: rgba(52, 211, 153, 0.5);
+    color: #34d399;
+    box-shadow: 0 0 14px rgba(52, 211, 153, 0.2);
+}
+
+.intersection.ns-green .ew-signal {
+    opacity: 0.45;
+}
+
+
+/* EW ACTIVE */
+
+.intersection.ew-green .ew-signal {
+    background: rgba(52, 211, 153, 0.16);
+    border-color: rgba(52, 211, 153, 0.5);
+    color: #34d399;
+    box-shadow: 0 0 14px rgba(52, 211, 153, 0.2);
+}
+
+.intersection.ew-green .ns-signal {
+    opacity: 0.45;
+}
+
+
+/* =========================================================
+   STOPPED VEHICLE EFFECT
+   ========================================================= */
+
+.intersection.ns-green .ew-vehicles .car,
+.intersection.ew-green .ns-vehicles .car {
+    filter:
+        grayscale(0.15)
+        drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+}
+
+
+/* Small visual glow around active direction */
+
+.intersection.ns-green {
+    box-shadow: inset 0 0 35px rgba(52, 211, 153, 0.035);
+}
+
+.intersection.ew-green {
+    box-shadow: inset 0 0 35px rgba(52, 211, 153, 0.035);
+}

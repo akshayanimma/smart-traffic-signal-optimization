@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Tarun patel\OneDrive\Desktop\Smart_Traffic_Project\.venv
+set VIRTUAL_ENV=C:\Users\rakes\OneDrive\Desktop\New folder\smart-traffic-signal-optimization\smart-traffic-signal-optimization\.venv
 
 if not defined PROMPT set PROMPT=$P$G
 

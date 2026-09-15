@@ -1,0 +1,1160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Traffic Signal Optimization</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🚦
+            </div>
+
+            <div>
+                <h2>SmartTraffic</h2>
+                <span>AI Signal Control</span>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#overview" class="nav-item active">
+                <span>▦</span>
+                Overview
+            </a>
+
+            <a href="#signals" class="nav-item">
+                <span>◉</span>
+                Signal Control
+            </a>
+
+            <a href="#predictions" class="nav-item">
+                <span>⌁</span>
+                Predictions
+            </a>
+
+            <a href="#performance" class="nav-item">
+                <span>▥</span>
+                Performance
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+                System Online
+            </div>
+
+            <small>
+                SUMO Simulation Engine
+            </small>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main class="main">
+
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="eyebrow">
+                    INTELLIGENT TRANSPORTATION SYSTEM
+                </p>
+
+                <h1>
+                    Traffic Control Center
+                </h1>
+
+                <p class="subtitle">
+                    Real-time adaptive traffic signal optimization using machine learning
+                </p>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <div class="simulation-badge" id="simulationBadge">
+                    <span class="pulse"></span>
+                    <span id="simulationStatus">
+                        Simulation Ready
+                    </span>
+                </div>
+
+                <div class="clock" id="clock">
+                    00:00:00
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             SIMULATION CONTROL
+        ====================================================== -->
+
+        <section class="simulation-control">
+
+            <div class="simulation-info">
+
+                <div>
+
+                    <span class="control-label">
+                        SIMULATION TIME
+                    </span>
+
+                    <strong id="simulationTime">
+                        0.0s
+                    </strong>
+
+                </div>
+
+
+                <div class="simulation-progress">
+
+                    <div class="progress-background">
+
+                        <div
+                            class="simulation-progress-bar"
+                            id="simulationProgress">
+                        </div>
+
+                    </div>
+
+                    <span>
+                        0s — 218s
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="simulation-buttons">
+
+                <button
+                    id="startBtn"
+                    class="control-btn primary"
+                >
+                    ▶ Start
+                </button>
+
+                <button
+                    id="pauseBtn"
+                    class="control-btn"
+                >
+                    ⏸ Pause
+                </button>
+
+                <button
+                    id="resetBtn"
+                    class="control-btn"
+                >
+                    ↻ Reset
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             KPI CARDS
+        ====================================================== -->
+
+        <section
+            class="kpi-grid"
+            id="overview"
+        >
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>Average Waiting Time</span>
+                    <span class="kpi-icon">⏱</span>
+                </div>
+
+                <div class="kpi-values">
+                    <strong>4.96</strong>
+                    <span class="unit">sec</span>
+                </div>
+
+                <div class="improvement positive">
+                    ↓ 42.40%
+                    <span>vs fixed-time</span>
+                </div>
+
+            </div>
+
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>Average Queue Length</span>
+                    <span class="kpi-icon">🚗</span>
+                </div>
+
+                <div class="kpi-values">
+                    <strong>7.42</strong>
+                    <span class="unit">vehicles</span>
+                </div>
+
+                <div class="improvement positive">
+                    ↓ 43.73%
+                    <span>vs fixed-time</span>
+                </div>
+
+            </div>
+
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>Average Travel Time</span>
+                    <span class="kpi-icon">↗</span>
+                </div>
+
+                <div class="kpi-values">
+                    <strong>87.84</strong>
+                    <span class="unit">sec</span>
+                </div>
+
+                <div class="improvement positive">
+                    ↓ 4.11%
+                    <span>vs fixed-time</span>
+                </div>
+
+            </div>
+
+
+
+            <div class="kpi-card">
+
+                <div class="kpi-top">
+                    <span>Throughput</span>
+                    <span class="kpi-icon">⇧</span>
+                </div>
+
+                <div class="kpi-values">
+                    <strong>79</strong>
+                    <span class="unit">vehicles</span>
+                </div>
+
+                <div class="improvement positive">
+                    ↑ 12.86%
+                    <span>vs fixed-time</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SIGNAL + PREDICTION
+        ====================================================== -->
+
+        <section
+            class="main-grid"
+            id="signals"
+        >
+
+
+            <!-- =================================================
+                 TRAFFIC SIGNAL
+            ================================================== -->
+
+            <div class="panel signal-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            LIVE INTERSECTION
+                        </p>
+
+                        <h2>
+                            Adaptive Signal Control
+                        </h2>
+
+                    </div>
+
+
+                    <span class="live-label">
+
+                        <span class="status-dot"></span>
+
+                        LIVE
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- INTERSECTION -->
+
+<div class="intersection" id="intersection">
+    <!-- ROADS -->
+    <div class="road vertical-road"></div>
+    <div class="road horizontal-road"></div>
+
+    <!-- LANE MARKINGS -->
+    <div class="lane-line vertical-line-1"></div>
+    <div class="lane-line vertical-line-2"></div>
+    <div class="lane-line horizontal-line-1"></div>
+    <div class="lane-line horizontal-line-2"></div>
+
+
+    <!-- TRAFFIC VEHICLES -->
+
+    <div class="vehicles ns-vehicles" id="nsVehicles">
+
+        <span class="car car-ns-1">🚗</span>
+        <span class="car car-ns-2">🚙</span>
+        <span class="car car-ns-3">🚕</span>
+        <span class="car car-ns-4">🚗</span>
+
+    </div>
+
+
+    <div class="vehicles ew-vehicles" id="ewVehicles">
+
+        <span class="car car-ew-1">🚗</span>
+        <span class="car car-ew-2">🚙</span>
+        <span class="car car-ew-3">🚕</span>
+        <span class="car car-ew-4">🚗</span>
+
+    </div>
+
+
+    <!-- INTERSECTION SIGNAL -->
+
+    <div class="intersection-center">
+
+        <!-- NS PRIORITY INDICATOR -->
+        <div
+            class="direction-signal ns-signal"
+            id="nsSignal">
+            <span>NS</span>
+        </div>
+
+
+        <!-- TRAFFIC LIGHT -->
+
+        <div class="traffic-light">
+
+            <div
+                class="light red"
+                id="redLight">
+            </div>
+
+            <div
+                class="light yellow"
+                id="yellowLight">
+            </div>
+
+            <div
+                class="light green active-light"
+                id="greenLight">
+            </div>
+
+        </div>
+
+
+        <!-- EW PRIORITY INDICATOR -->
+
+        <div
+            class="direction-signal ew-signal"
+            id="ewSignal">
+            <span>EW</span>
+        </div>
+
+    </div>
+
+
+    <!-- DIRECTION LABELS -->
+
+    <div class="direction north">
+        <span>N</span>
+        <strong>North</strong>
+    </div>
+
+    <div class="direction south">
+        <span>S</span>
+        <strong>South</strong>
+    </div>
+
+    <div class="direction east">
+        <span>E</span>
+        <strong>East</strong>
+    </div>
+
+    <div class="direction west">
+        <span>W</span>
+        <strong>West</strong>
+    </div>
+
+
+    <!-- DENSITY INDICATORS -->
+
+    <div class="density-badge ns-density" id="nsDensity">
+        NS Density 0%
+    </div>
+
+    <div class="density-badge ew-density" id="ewDensity">
+        EW Density 0%
+    </div>
+
+</div>
+
+
+                <!-- =================================================
+                     SIGNAL INFORMATION
+                ================================================== -->
+
+                <div class="signal-info">
+
+                    <div class="signal-stat">
+
+                        <span>
+                            Current Phase
+                        </span>
+
+                        <strong id="currentPhase">
+                            NS Green
+                        </strong>
+
+                    </div>
+
+
+                    <div class="signal-stat">
+
+                        <span>
+                            Green Duration
+                        </span>
+
+                        <strong id="greenDuration">
+                            46.4 sec
+                        </strong>
+
+                    </div>
+
+
+                    <div class="signal-stat">
+
+                        <span>
+                            Priority
+                        </span>
+
+                        <strong
+                            class="priority"
+                            id="priority"
+                        >
+                            North–South
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 PREDICTION PANEL
+            ====================================================== -->
+
+            <div
+                class="panel prediction-panel"
+                id="predictions"
+            >
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            MACHINE LEARNING
+                        </p>
+
+                        <h2>
+                            Traffic Prediction
+                        </h2>
+
+                    </div>
+
+
+                    <span class="model-badge">
+                        ML MODEL
+                    </span>
+
+                </div>
+
+
+
+                <div class="prediction-content">
+
+
+                    <!-- NS prediction -->
+
+                    <div class="traffic-direction">
+
+                        <div class="direction-header">
+
+                            <span>
+                                North ↕ South
+                            </span>
+
+                            <strong id="nsValue">
+                                0.348
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-bar ns-bar"
+                                id="nsBar"
+                            ></div>
+
+                        </div>
+
+
+                        <small>
+                            Predicted traffic intensity
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- EW prediction -->
+
+                    <div class="traffic-direction">
+
+                        <div class="direction-header">
+
+                            <span>
+                                East ↔ West
+                            </span>
+
+                            <strong id="ewValue">
+                                0.469
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-bar ew-bar"
+                                id="ewBar"
+                            ></div>
+
+                        </div>
+
+
+                        <small>
+                            Predicted traffic intensity
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- Decision -->
+
+                    <div class="decision-box">
+
+                        <span class="decision-label">
+                            ADAPTIVE DECISION
+                        </span>
+
+
+                        <div class="decision-main">
+
+                            <strong id="decision">
+                                EAST–WEST
+                            </strong>
+
+                            <span>
+                                gets priority
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            Signal timing is dynamically adjusted according to predicted traffic demand.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- Visualization note -->
+
+                    <div class="prediction-note">
+
+                        <span>ⓘ</span>
+
+                        <p>
+                            Vehicle movement is a visual representation
+                            of predicted traffic intensity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PERFORMANCE
+        ====================================================== -->
+
+        <section
+            class="panel performance-panel"
+            id="performance"
+        >
+
+            <div class="panel-header">
+
+                <div>
+
+                    <p class="section-label">
+                        SIMULATION RESULTS
+                    </p>
+
+                    <h2>
+                        Fixed-Time vs Adaptive Control
+                    </h2>
+
+                </div>
+
+
+                <span class="result-badge">
+                    SUMO RESULTS
+                </span>
+
+            </div>
+
+
+
+            <div class="comparison-grid">
+
+
+                <!-- Waiting -->
+
+                <div class="comparison-card">
+
+                    <div class="comparison-title">
+
+                        <span>
+                            Waiting Time
+                        </span>
+
+                        <strong>
+                            42.40%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="compare-bars">
+
+                        <div>
+
+                            <label>
+                                Fixed
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar fixed"
+                                    style="width:100%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                8.61 sec
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <label>
+                                Adaptive
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar adaptive"
+                                    style="width:58%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                4.96 sec
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Queue -->
+
+                <div class="comparison-card">
+
+                    <div class="comparison-title">
+
+                        <span>
+                            Queue Length
+                        </span>
+
+                        <strong>
+                            43.73%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="compare-bars">
+
+                        <div>
+
+                            <label>
+                                Fixed
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar fixed"
+                                    style="width:100%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                13.19
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <label>
+                                Adaptive
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar adaptive"
+                                    style="width:56%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                7.42
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Travel -->
+
+                <div class="comparison-card">
+
+                    <div class="comparison-title">
+
+                        <span>
+                            Travel Time
+                        </span>
+
+                        <strong>
+                            4.11%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="compare-bars">
+
+                        <div>
+
+                            <label>
+                                Fixed
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar fixed"
+                                    style="width:100%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                91.60 sec
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <label>
+                                Adaptive
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar adaptive"
+                                    style="width:96%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                87.84 sec
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Throughput -->
+
+                <div class="comparison-card">
+
+                    <div class="comparison-title">
+
+                        <span>
+                            Throughput
+                        </span>
+
+                        <strong>
+                            +12.86%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="compare-bars">
+
+                        <div>
+
+                            <label>
+                                Fixed
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar fixed"
+                                    style="width:89%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                70 vehicles
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <label>
+                                Adaptive
+                            </label>
+
+                            <div class="bar-container">
+
+                                <div
+                                    class="bar adaptive"
+                                    style="width:100%"
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                79 vehicles
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             TIMELINE
+        ====================================================== -->
+
+        <section class="panel timeline-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <p class="section-label">
+                        CONTROLLER ACTIVITY
+                    </p>
+
+                    <h2>
+                        Adaptive Decision Timeline
+                    </h2>
+
+                </div>
+
+
+                <span class="time-range">
+                    Simulation snapshots
+                </span>
+
+            </div>
+
+
+
+            <div class="timeline-table">
+
+
+                <div class="table-header">
+
+                    <span>TIME</span>
+
+                    <span>PREDICTED NS</span>
+
+                    <span>PREDICTED EW</span>
+
+                    <span>PRIORITY</span>
+
+                    <span>GREEN</span>
+
+                </div>
+
+
+
+                <div class="table-row">
+
+                    <span>t = 1s</span>
+
+                    <span>0.348</span>
+
+                    <span>0.469</span>
+
+                    <span class="ew-text">
+                        East–West
+                    </span>
+
+                    <span>39.7s</span>
+
+                </div>
+
+
+
+                <div class="table-row">
+
+                    <span>t = 41s</span>
+
+                    <span>0.629</span>
+
+                    <span>0.380</span>
+
+                    <span class="ns-text">
+                        North–South
+                    </span>
+
+                    <span>46.4s</span>
+
+                </div>
+
+
+
+                <div class="table-row">
+
+                    <span>t = 81s</span>
+
+                    <span>0.605</span>
+
+                    <span>0.316</span>
+
+                    <span class="ns-text">
+                        North–South
+                    </span>
+
+                    <span>73.4s</span>
+
+                </div>
+
+
+
+                <div class="table-row">
+
+                    <span>t = 121s</span>
+
+                    <span>0.244</span>
+
+                    <span>0.562</span>
+
+                    <span class="ew-text">
+                        East–West
+                    </span>
+
+                    <span>58.3s</span>
+
+                </div>
+
+
+
+                <div class="table-row">
+
+                    <span>t = 161s</span>
+
+                    <span>0.155</span>
+
+                    <span>0.040</span>
+
+                    <span class="ns-text">
+                        North–South
+                    </span>
+
+                    <span>54.5s</span>
+
+                </div>
+
+
+
+                <div class="table-row">
+
+                    <span>t = 201s</span>
+
+                    <span>0.047</span>
+
+                    <span>0.187</span>
+
+                    <span class="ew-text">
+                        East–West
+                    </span>
+
+                    <span>50.0s</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+        <footer>
+
+            Smart Traffic Signal Optimization
+            · ML + SUMO/TraCI
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

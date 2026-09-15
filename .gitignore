@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.vscode/
+.idea/
+
+sumo/state.json
+adaptive_queue.xml
+adaptive_tripinfo.xml

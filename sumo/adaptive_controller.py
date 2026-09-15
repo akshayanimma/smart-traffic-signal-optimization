@@ -1,5 +1,7 @@
 
 import os
+import json
+import time
 import traci
 import pandas as pd
 
@@ -7,18 +9,43 @@ import pandas as pd
 # ============================================================
 # CONFIGURATION
 # ============================================================
+CURRENT_STATE = {
+    "simulation_time": 0,
+    "intersection": "center",
+    "priority": "",
+    "phase": 0,
+    "green_time": 0,
+    "prediction": {
+    "ns": 0,
+    "ew": 0
+},
+"actual": {
+    "ns": 0,
+    "ew": 0
+},
+"final": {
+    "ns": 0,
+    "ew": 0
+}
+}
+
+
+def write_state():
+    state_file = os.path.join(SCRIPT_DIR, "state.json")
+    with open(state_file, "w") as f:
+        json.dump(CURRENT_STATE, f, indent=2)
+
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Prediction CSV
-CSV_FILE = r"C:\Users\Tarun patel\Downloads\traffic_prediction.csv"
-
+CSV_FILE = os.path.join(SCRIPT_DIR, "traffic_prediction.csv")
 # SUMO configuration
 SUMO_CONFIG = os.path.join(
     SCRIPT_DIR,
     "traffic.sumocfg"
 )
-
+SUMO_BINARY = "sumo-gui"
 # Traffic light
 TRAFFIC_LIGHT_ID = "center"
 
@@ -497,7 +524,9 @@ def update_traffic_light(
     print(
         "Traffic light updated."
     )
-
+    CURRENT_STATE["priority"] = priority
+    CURRENT_STATE["phase"] = phase
+    CURRENT_STATE["green_time"] = green_time
 
 # ============================================================
 # MAIN
@@ -561,18 +590,7 @@ def main():
         "\nStarting SUMO..."
     )
 
-    traci.start([
-        "sumo-gui",
-        "-c",
-        SUMO_CONFIG,
-        "--end",
-        str(SIMULATION_END),
-        "--tripinfo-output",
-        "adaptive_tripinfo.xml",
-        "--queue-output",
-        "adaptive_queue.xml"
-    ])
-
+    traci.start([SUMO_BINARY, "-c", SUMO_CONFIG])    
     print(
         "TraCI connected."
     )
@@ -622,13 +640,17 @@ def main():
             < SIMULATION_END
         ):
 
-            # Advance SUMO
+            
+# Advance SUMO in real time
             traci.simulationStep()
-
+            time.sleep(1)
+            traci.simulation.setScale(1.0)
             simulation_time = (
                 traci.simulation.getTime()
             )
 
+            CURRENT_STATE["simulation_time"] = simulation_time
+            write_state()
             # ------------------------------------------------
             # Adaptive control
             # ------------------------------------------------
@@ -695,6 +717,9 @@ def main():
                     f"{predicted_ew:.3f}"
                 )
 
+                CURRENT_STATE["prediction"]["ns"] = predicted_ns
+                CURRENT_STATE["prediction"]["ew"] = predicted_ew
+
                 print(
                     f"Actual NS score    : "
                     f"{actual_ns:.3f}"
@@ -704,7 +729,8 @@ def main():
                     f"Actual EW score    : "
                     f"{actual_ew:.3f}"
                 )
-
+                CURRENT_STATE["actual"]["ns"] = actual_ns
+                CURRENT_STATE["actual"]["ew"] = actual_ew
                 # ------------------------------------------------
                 # Combine prediction + actual traffic
                 #
@@ -731,7 +757,8 @@ def main():
                     f"Final EW score     : "
                     f"{ew_score:.3f}"
                 )
-
+                CURRENT_STATE["final"]["ns"] = ns_score
+                CURRENT_STATE["final"]["ew"] = ew_score
                 # ------------------------------------------------
                 # Update traffic signal
                 # ------------------------------------------------
@@ -740,7 +767,7 @@ def main():
                     ns_score,
                     ew_score
                 )
-
+                write_state()
                 last_control_time = (
                     simulation_time
                 )
@@ -769,3 +796,8 @@ def main():
 if __name__ == "__main__":
 
     main()
+
+
+
+
+
